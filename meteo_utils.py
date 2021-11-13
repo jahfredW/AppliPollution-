@@ -46,6 +46,23 @@ def construire_affichage_prevision_pression_athmospherique(ville):
     return previsions
 
 
+"""def construire_affichage_pollution(ville)
+
+    previsions = {}
+
+    previsions['j1'] = str(meteo.get_pol(ville, PREVISION_J_PLUS_1)) + " hPa"
+    previsions['j2'] = str(meteo.get_pression_athmospherique_prevision(ville, PREVISION_J_PLUS_2)) + " hPa"
+    previsions['j3'] = str(meteo.get_pression_athmospherique_prevision(ville, PREVISION_J_PLUS_3)) + " hPa"
+    previsions['j4'] = str(meteo.get_pression_athmospherique_prevision(ville, PREVISION_J_PLUS_4)) + " hPa"
+    previsions['j5'] = str(meteo.get_pression_athmospherique_prevision(ville, PREVISION_J_PLUS_5)) + " hPa"
+    previsions['j6'] = str(meteo.get_pression_athmospherique_prevision(ville, PREVISION_J_PLUS_6)) + " hPa"
+    previsions['j7'] = str(meteo.get_pression_athmospherique_prevision(ville, PREVISION_J_PLUS_7)) + " hPa"
+"""
+
+
+
+
+
 def construire_affichage_prevision_avis_meteo_detaille(ville):
     """
     Construit en mémoire un dictionnaire qui contient l'avis météo détaillé prévisionnelle

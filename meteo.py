@@ -1,7 +1,10 @@
 import pyowm
+from datetime import datetime
 import requests
 from pyowm.utils.config import get_default_config
 from pyowm.utils import measurables
+from pyowm.utils import timestamps, formatting
+import requests
 
 # initialisation des variables du module (le "_" devant le nom des variables est une convention
 # pour indiquer qu'elle doivent être utilisées à titre privé dans le module
@@ -61,6 +64,18 @@ def recherche_ville(ville):
         print("Erreur : l'API météo n'est pas initialisée")
 
 
+def _get_location(ville, pays):
+    meteo = _get_meteo_api()
+    reg = meteo.city_id_registry()
+    emplacements = reg.locations_for(ville, pays)
+    liste = str(emplacements)
+    listeSplit = liste.split(',')
+    chaine = listeSplit[1]
+    chaine = chaine.split('=')
+    print(f" La ville de {chaine[1]} a les coordonnées{listeSplit[2]} et{listeSplit[3]}")
+
+    return chaine[1], listeSplit[2], listeSplit[3]
+
 
 def _get_meteo_ville(ville):
     '''
@@ -96,6 +111,22 @@ def _get_meteo_ville(ville):
         print("Erreur : l'API météo n'est pas initialisée")
 
 
+def reception_time(rec_time, timeformat='unix'):
+    """Returns the GMT time telling when the forecast was received
+            from the OWM Weather API
+
+    :param timeformat: the format for the time value. May be:
+        '*unix*' (default) for UNIX time
+        '*iso*' for ISO8601-formatted string in the format ``YYYY-MM-DD HH:MM:SS+00``
+        '*date* for ``datetime.datetime`` object instance
+    :type timeformat: str
+    :returns: an int or a str
+    :raises: ValueError
+
+    """
+    return formatting.timeformat(rec_time, timeformat)
+
+
 def _get_pollution_ville(ville):
     '''
     Obtient les informations météo courantes d'une ville
@@ -119,15 +150,32 @@ def _get_pollution_ville(ville):
 
         # on obtient les informations météos de la ville
         pol = meteo.airpollution_manager()
-        meteo_ville = pol.air_quality_at_coords(lat=emplacement.lat, lon=emplacement.lon)
-
+        meteo_ville = pol.air_quality_forecast_at_coords(emplacement.lon, emplacement.lat)
+        # meteo_ville.air_quality_data
         # on enregistre en mémoire pour la prochaine demande
-        _meteo_villes[ville] = meteo_ville
+        # _meteo_villes[ville] = meteo_ville
 
         # on renvoi la météo demandée pour la ville
-        return meteo_ville
-    else:
-        print("Erreur : l'API météo n'est pas initialisée")
+        # print(str(reception_time(meteo_ville[0].rec_time)))
+
+        # print(datetime.utcfromtimestamp(meteo_ville[0].ref_time).strftime('%Y-%m-%d %H:%M:%S'))
+
+        # for forecast in meteo_ville:
+        #     print(datetime.utcfromtimestamp(forecast.ref_time).strftime('%Y-%m-%d %H:%M:%S'))
+
+        for forecast in meteo_ville:
+            print(forecast.reference_time(timeformat='date'))
+
+
+
+
+            # print(str(forecast.air_quality_data['co']))
+
+
+
+        # return meteo_ville
+    # else:
+    #     print("Erreur : l'API météo n'est pas initialisée")
 
 
 """
@@ -162,13 +210,14 @@ def _get_pollution_ville(ville):
 
     print(pollution['pm10'])
 """
-
+"""
 def get_pol(ville):
     meteo = _get_meteo_api()
     if meteo is not None:
         meteo_ville = _get_pollution_ville(ville)
 
         return meteo_ville.air_quality_data
+"""
 
 
 def get_temperature_actuelle(ville):
@@ -232,6 +281,11 @@ def get_avis_meteo_detaille_prevision(ville, period):
 
     meteo_ville = _get_meteo_ville(ville)
     return meteo_ville.forecast_daily[period].detailed_status
+
+
+def get_prevision_pollution(ville):
+    meteo_ville = get_pol(ville)
+    return meteo_ville
 
 
 def get_humidite_prevision(ville, period):

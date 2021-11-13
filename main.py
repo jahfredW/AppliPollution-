@@ -2,9 +2,15 @@ import meteo
 import affichage_meteo
 from meteo_common import *
 from meteo_utils import *
+import requests
 
 if __name__ == '__main__':
 
+    meteo._get_location('paris','FR')
+    print(meteo._get_pollution_ville('paris'))
+
+
+    """
     # on définit un variable pour contenir le nom de la ville pour laquelle afficher la météo
     ville_en_cours = ""
 
@@ -121,8 +127,9 @@ if __name__ == '__main__':
                 affichage_meteo.afficher_liste_ville(choix_ville_recherche)
 
                 ville_en_cours = choix_ville_recherche[int(input("Pour consulter la météo d'une ville, tapez son numéro dans la liste> "))]
-
-                print(meteo.get_pol(ville_en_cours))
+            
+                
 
     else:
         print("Désolé votre choix n'est pas un 1 ou 2, que souhaitez-vous faire ?")
+"""
