@@ -1,4 +1,5 @@
 import meteo
+import pollution
 from meteo_common import *
 
 
@@ -51,11 +52,11 @@ def construire_affichage_nh3(ville):
     previsions = {}
 
     previsions['description'] = "Nh3"
-    previsions['j1'] = str(meteo.get_nh3(ville, POLLUTION_J_PLUS_1))
-    previsions['j2'] = str(meteo.get_nh3(ville, POLLUTION_J_PLUS_2))
-    previsions['j3'] = str(meteo.get_nh3(ville, POLLUTION_J_PLUS_3))
-    previsions['j4'] = str(meteo.get_nh3(ville, POLLUTION_J_PLUS_4))
-    previsions['j5'] = str(meteo.get_nh3(ville, POLLUTION_J_PLUS_5))
+    previsions['j1'] = str(pollution.get_nh3(ville, POLLUTION_J_PLUS_1))
+    previsions['j2'] = str(pollution.get_nh3(ville, POLLUTION_J_PLUS_2))
+    previsions['j3'] = str(pollution.get_nh3(ville, POLLUTION_J_PLUS_3))
+    previsions['j4'] = str(pollution.get_nh3(ville, POLLUTION_J_PLUS_4))
+    previsions['j5'] = str(pollution.get_nh3(ville, POLLUTION_J_PLUS_5))
     previsions['j6'] = "None"
     previsions['j7'] = "None"
 
@@ -66,11 +67,11 @@ def construire_affichage_pm10(ville):
     previsions = {}
 
     previsions['description'] = "pm10"
-    previsions['j1'] = str(meteo.get_pm10_j5(ville, POLLUTION_J_PLUS_1))
-    previsions['j2'] = str(meteo.get_pm10_j5(ville, POLLUTION_J_PLUS_2))
-    previsions['j3'] = str(meteo.get_pm10_j5(ville, POLLUTION_J_PLUS_3))
-    previsions['j4'] = str(meteo.get_pm10_j5(ville, POLLUTION_J_PLUS_4))
-    previsions['j5'] = str(meteo.get_pm10_j5(ville, POLLUTION_J_PLUS_5))
+    previsions['j1'] = str(pollution.get_pm10_j5(ville, POLLUTION_J_PLUS_1))
+    previsions['j2'] = str(pollution.get_pm10_j5(ville, POLLUTION_J_PLUS_2))
+    previsions['j3'] = str(pollution.get_pm10_j5(ville, POLLUTION_J_PLUS_3))
+    previsions['j4'] = str(pollution.get_pm10_j5(ville, POLLUTION_J_PLUS_4))
+    previsions['j5'] = str(pollution.get_pm10_j5(ville, POLLUTION_J_PLUS_5))
     previsions['j6'] = "None"
     previsions['j7'] = "None"
 
@@ -81,11 +82,11 @@ def construire_affichage_co(ville):
     previsions = {}
 
     previsions['description'] = "Co"
-    previsions['j1'] = str(meteo.get_co(ville, POLLUTION_J_PLUS_1))
-    previsions['j2'] = str(meteo.get_co(ville, POLLUTION_J_PLUS_2))
-    previsions['j3'] = str(meteo.get_co(ville, POLLUTION_J_PLUS_3))
-    previsions['j4'] = str(meteo.get_co(ville, POLLUTION_J_PLUS_4))
-    previsions['j5'] = str(meteo.get_co(ville, POLLUTION_J_PLUS_5))
+    previsions['j1'] = str(pollution.get_co(ville, POLLUTION_J_PLUS_1))
+    previsions['j2'] = str(pollution.get_co(ville, POLLUTION_J_PLUS_2))
+    previsions['j3'] = str(pollution.get_co(ville, POLLUTION_J_PLUS_3))
+    previsions['j4'] = str(pollution.get_co(ville, POLLUTION_J_PLUS_4))
+    previsions['j5'] = str(pollution.get_co(ville, POLLUTION_J_PLUS_5))
     previsions['j6'] = "None"
     previsions['j7'] = "None"
 
@@ -97,11 +98,11 @@ def construire_affichage_pm25(ville):
     previsions = {}
 
     previsions['description'] = "pm2_5"
-    previsions['j1'] = str(meteo.get_pm25_j5(ville, POLLUTION_J_PLUS_1))
-    previsions['j2'] = str(meteo.get_pm25_j5(ville, POLLUTION_J_PLUS_2))
-    previsions['j3'] = str(meteo.get_pm25_j5(ville, POLLUTION_J_PLUS_3))
-    previsions['j4'] = str(meteo.get_pm25_j5(ville, POLLUTION_J_PLUS_4))
-    previsions['j5'] = str(meteo.get_pm25_j5(ville, POLLUTION_J_PLUS_5))
+    previsions['j1'] = str(pollution.get_pm25_j5(ville, POLLUTION_J_PLUS_1))
+    previsions['j2'] = str(pollution.get_pm25_j5(ville, POLLUTION_J_PLUS_2))
+    previsions['j3'] = str(pollution.get_pm25_j5(ville, POLLUTION_J_PLUS_3))
+    previsions['j4'] = str(pollution.get_pm25_j5(ville, POLLUTION_J_PLUS_4))
+    previsions['j5'] = str(pollution.get_pm25_j5(ville, POLLUTION_J_PLUS_5))
     previsions['j6'] = "None"
     previsions['j7'] = "None"
 
@@ -113,11 +114,11 @@ def construire_affichage_aqi(ville):
     previsions = {}
 
     previsions['description'] = "AIR QUALITY"
-    previsions['j1'] = str(meteo.get_aqi(ville, POLLUTION_J_PLUS_1))
-    previsions['j2'] = str(meteo.get_aqi(ville, POLLUTION_J_PLUS_2))
-    previsions['j3'] = str(meteo.get_aqi(ville, POLLUTION_J_PLUS_3))
-    previsions['j4'] = str(meteo.get_aqi(ville, POLLUTION_J_PLUS_4))
-    previsions['j5'] = str(meteo.get_aqi(ville, POLLUTION_J_PLUS_5))
+    previsions['j1'] = str(pollution.get_aqi(ville, POLLUTION_J_PLUS_1))
+    previsions['j2'] = str(pollution.get_aqi(ville, POLLUTION_J_PLUS_2))
+    previsions['j3'] = str(pollution.get_aqi(ville, POLLUTION_J_PLUS_3))
+    previsions['j4'] = str(pollution.get_aqi(ville, POLLUTION_J_PLUS_4))
+    previsions['j5'] = str(pollution.get_aqi(ville, POLLUTION_J_PLUS_5))
     previsions['j6'] = "None"
     previsions['j7'] = "None"
 

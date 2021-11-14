@@ -57,7 +57,7 @@ def _afficher_ligne_prevision(text, val_jour1, val_jour2, val_jour3, val_jour4, 
     print(description + jour1 + jour2 + jour3 + jour4 + jour5 + jour6 + jour7)
 
 
-def afficher_en_tete(ville, date, aqi, nh3, co, pm10, pm25):
+def afficher_en_tetePol(ville, date, aqi, nh3, co, pm10, pm25):
     """
     Formatage de l'en tête contenant les informations de météo actuelle pour une ville donnée
     :param ville: la ville sur laquelle porte la recherche
@@ -75,6 +75,32 @@ def afficher_en_tete(ville, date, aqi, nh3, co, pm10, pm25):
     print("*" + ("*" * (ECRAN_NOMBRE_COLONNES - 7)) + "*")
     print(message_ligne)
     print("*" + ("*" * (ECRAN_NOMBRE_COLONNES - 7)) + "*")
+
+
+def afficher_en_tete(ville, period, temp, pression, humi, windV, windD):
+    """
+    Formatage de l'en tête contenant les informations de météo actuelle pour une ville donnée
+    :param ville: la ville sur laquelle porte la recherche
+    :param temperature: la température actuelle
+    :param condition_meteo: une description courte de la condition météo actuelle
+    """
+    message1 = "Ville: " + ville
+    message2 = "info: " + period
+    message3 = "temp: " + str(temp) + "°C"
+    message4 = "pression: " + str(pression) + "hpa"
+    message5 = "humidité: " + str(humi)
+    message6 = "Vent: " + str(windV) + "km/h" + " - " + "Direction: " + str(windD) + "°"
+    message_ligne = _fermer_ligne("| " + message1 + " - " + message2 + " - " + message3 + " - " + message4
+                                  + " - " + message5 + " - " + message6)
+    print("*" + ("*" * (ECRAN_NOMBRE_COLONNES - 7)) + "*")
+    print(message_ligne)
+    print("*" + ("*" * (ECRAN_NOMBRE_COLONNES - 7)) + "*")
+
+
+
+
+
+
 
 
 def afficher_previsions(previsions):
@@ -190,9 +216,8 @@ def afficher_ecran_accueil():
     print("|" + (" " * (ECRAN_NOMBRE_COLONNES - 3)) + "|")
     print("|" + (" Bienvenue dans ce programme météo, que souhaitez-vous faire ?"))
     print("|" + (" " * (ECRAN_NOMBRE_COLONNES - 3)) + "|")
-    print(_fermer_ligne("|    1) Chercher une ville (tapez 1 et appuyez sur la touche entée)"))
-    print(_fermer_ligne("|    2) Consulter la météo d'une ville (tapez 2 et appuyez sur la touche entée)"))
-    print(_fermer_ligne("|    3) Consulter la pollution dans votre ville (tapez 3 et appuyez sur entree) "))
+    print(_fermer_ligne("|    1) Consulter les prévisions météo pour votre ville (tapez 1 et appuyez sur la touche entée)"))
+    print(_fermer_ligne("|    2) Consulter les prévisions pollution pour  votre ville (tapez 2 et appuyez sur entree) "))
     print("|" + (" " * (ECRAN_NOMBRE_COLONNES - 3)) + "|")
     print("|" + ("-" * (ECRAN_NOMBRE_COLONNES - 3)) + "|")
     print()
