@@ -232,7 +232,46 @@ print(pollution)
 """
 
 
+"""
+    def get_pollution(api_key, lat, lon):
+        url = f"http://api.openweathermap.org/data/2.5/air_pollution?lat={lat}&lon={lon}&appid={api_key}"
 
+        pollution = {}
+
+        response = requests.get(url).json()
+        co = response['list'][0]['components']['co']
+        pollution['co'] = co
+
+        response = requests.get(url).json()
+        o3 = response['list'][0]['components']['o3']
+        pollution['o3'] = o3
+
+        response = requests.get(url).json()
+        so2 = response['list'][0]['components']['so2']
+        pollution['so2'] = so2
+
+        response = requests.get(url).json()
+        pm2_5 = response['list'][0]['components']['pm2_5']
+        pollution['pm2_5'] = pm2_5
+
+        response = requests.get(url).json()
+        pm10 = response['list'][0]['components']['pm10']
+        pollution['pm10'] = pm10
+
+        return pollution
+
+    pollution = get_pollution(api_key, lat, lon)
+
+    print(pollution['pm10'])
+"""
+"""
+def get_pol(ville):
+    meteo = _get_meteo_api()
+    if meteo is not None:
+        meteo_ville = _get_pollution_ville(ville)
+
+        return meteo_ville.air_quality_data
+"""
 
 
 

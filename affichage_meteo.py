@@ -57,7 +57,7 @@ def _afficher_ligne_prevision(text, val_jour1, val_jour2, val_jour3, val_jour4, 
     print(description + jour1 + jour2 + jour3 + jour4 + jour5 + jour6 + jour7)
 
 
-def afficher_en_tete(ville, temperature, condition_meteo):
+def afficher_en_tete(ville, nh3):
     """
     Formatage de l'en tête contenant les informations de météo actuelle pour une ville donnée
     :param ville: la ville sur laquelle porte la recherche
@@ -65,9 +65,8 @@ def afficher_en_tete(ville, temperature, condition_meteo):
     :param condition_meteo: une description courte de la condition météo actuelle
     """
     message1 = "Ville: " + ville
-    message2 = "Temperature: " + str(temperature)
-    message3 = "Condition: " + condition_meteo
-    message_ligne = _fermer_ligne("| " + message1 + " > " + message2 + " > " + message3)
+    message4 = "nh3: " + str(nh3)
+    message_ligne = _fermer_ligne("| " + message1 + ">" + message4)
     print("|" + ("-" * (ECRAN_NOMBRE_COLONNES - 7)) + "|")
     print(message_ligne)
     print("|" + ("-" * (ECRAN_NOMBRE_COLONNES - 7)) + "|")
@@ -197,6 +196,6 @@ def afficher_liste_ville(choix_ville_recherche):
     pour chaque ville à l'utilisateur. Cet index sera utilisé ensuite pour que l'utilisateur indique son choix
     :param choix_ville_recherche:
     """
-    print("Voicie la liste des villes trouvées :")
+    print("Voici la liste des villes trouvées :")
     for choix_ville in choix_ville_recherche.items():
         print('\t' + str(choix_ville[0]) + ") " + choix_ville[1])

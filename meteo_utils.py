@@ -46,19 +46,35 @@ def construire_affichage_prevision_pression_athmospherique(ville):
     return previsions
 
 
-"""def construire_affichage_pollution(ville)
+def construire_affichage_nh3(ville):
 
     previsions = {}
 
-    previsions['j1'] = str(meteo.get_pol(ville, PREVISION_J_PLUS_1)) + " hPa"
-    previsions['j2'] = str(meteo.get_pression_athmospherique_prevision(ville, PREVISION_J_PLUS_2)) + " hPa"
-    previsions['j3'] = str(meteo.get_pression_athmospherique_prevision(ville, PREVISION_J_PLUS_3)) + " hPa"
-    previsions['j4'] = str(meteo.get_pression_athmospherique_prevision(ville, PREVISION_J_PLUS_4)) + " hPa"
-    previsions['j5'] = str(meteo.get_pression_athmospherique_prevision(ville, PREVISION_J_PLUS_5)) + " hPa"
-    previsions['j6'] = str(meteo.get_pression_athmospherique_prevision(ville, PREVISION_J_PLUS_6)) + " hPa"
-    previsions['j7'] = str(meteo.get_pression_athmospherique_prevision(ville, PREVISION_J_PLUS_7)) + " hPa"
-"""
+    previsions['description'] = "Nh3"
+    previsions['j1'] = str(meteo.get_nh3(ville, POLLUTION_J_PLUS_1))
+    previsions['j2'] = str(meteo.get_nh3(ville, POLLUTION_J_PLUS_2))
+    previsions['j3'] = str(meteo.get_nh3(ville, POLLUTION_J_PLUS_3))
+    previsions['j4'] = str(meteo.get_nh3(ville, POLLUTION_J_PLUS_4))
+    previsions['j5'] = str(meteo.get_nh3(ville, POLLUTION_J_PLUS_5))
+    previsions['j6'] = "None"
+    previsions['j7'] = "None"
 
+    return previsions
+
+def construire_affichage_pm10(ville):
+
+    previsions = {}
+
+    previsions['description'] = "pm10"
+    previsions['j1'] = str(meteo.get_pm10_j5(ville, POLLUTION_J_PLUS_1))
+    previsions['j2'] = str(meteo.get_pm10_j5(ville, POLLUTION_J_PLUS_2))
+    previsions['j3'] = str(meteo.get_pm10_j5(ville, POLLUTION_J_PLUS_3))
+    previsions['j4'] = str(meteo.get_pm10_j5(ville, POLLUTION_J_PLUS_4))
+    previsions['j5'] = str(meteo.get_pm10_j5(ville, POLLUTION_J_PLUS_5))
+    previsions['j6'] = "None"
+    previsions['j7'] = "None"
+
+    return previsions
 
 
 

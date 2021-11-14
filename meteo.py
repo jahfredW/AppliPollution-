@@ -150,7 +150,7 @@ def _get_pollution_ville(ville):
 
         # on obtient les informations météos de la ville
         pol = meteo.airpollution_manager()
-        meteo_ville = pol.air_quality_forecast_at_coords(emplacement.lon, emplacement.lat)
+        pol_ville = pol.air_quality_forecast_at_coords(emplacement.lon, emplacement.lat)
         # meteo_ville.air_quality_data
         # on enregistre en mémoire pour la prochaine demande
         # _meteo_villes[ville] = meteo_ville
@@ -160,11 +160,10 @@ def _get_pollution_ville(ville):
 
         # print(datetime.utcfromtimestamp(meteo_ville[0].ref_time).strftime('%Y-%m-%d %H:%M:%S'))
 
-        return meteo_ville
+        return pol_ville
 
     else:
         print("Erreur : l'API météo n'est pas initialisée")
-
 
         date = []
         indice = []
@@ -178,84 +177,39 @@ def _get_pollution_ville(ville):
         #    print(forecast.reference_time(timeformat='date'))
 
 
-def get_date(ville):
-    date = []
-    tranche_24h = 0
-    for jours in range(0, 5):
-        # --- On ajoute à la liste date les previsions à n +
-        date.append(ville[tranche_24h].reference_time(timeformat='iso'))
-        # On incrémente la tranche de 24h
-        tranche_24h = tranche_24h + 24
-    print(date)
-    # On retourne une liste contenant les dates + 24
-
-    # return date
-
-    """
+def get_date(ville, period):
+    date_ville = _get_pollution_ville(ville)
+    date = date_ville[period].reception_time(timeformat='iso')
+    return date
 
 
+"""
                 return meteo_ville
             # else:
             #     print("Erreur : l'API météo n'est pas initialisée")
 
 
-        """
-
-
-def get_nh3():
-    nh3 = []
-    tranche_24h = 0
-
-    for jours in range(0, 5):
-        # --- On ajoute à la liste date les previsions à n +
-        nh3.append(response['list'][tranche_24h]['components']['nh3'])
-        # On incrémente la tranche de 24h
-        tranche_24h = tranche_24h + 24
-    print(nh3)
-    # On retourne une liste contenant les dates + 24
-    return nh3
-
-
 """
-    def get_pollution(api_key, lat, lon):
-        url = f"http://api.openweathermap.org/data/2.5/air_pollution?lat={lat}&lon={lon}&appid={api_key}"
 
-        pollution = {}
 
-        response = requests.get(url).json()
-        co = response['list'][0]['components']['co']
-        pollution['co'] = co
-
-        response = requests.get(url).json()
-        o3 = response['list'][0]['components']['o3']
-        pollution['o3'] = o3
-
-        response = requests.get(url).json()
-        so2 = response['list'][0]['components']['so2']
-        pollution['so2'] = so2
-
-        response = requests.get(url).json()
-        pm2_5 = response['list'][0]['components']['pm2_5']
-        pollution['pm2_5'] = pm2_5
-
-        response = requests.get(url).json()
-        pm10 = response['list'][0]['components']['pm10']
-        pollution['pm10'] = pm10
-
-        return pollution
-
-    pollution = get_pollution(api_key, lat, lon)
-
-    print(pollution['pm10'])
-"""
-"""
-def get_pol(ville):
+def get_nh3(ville, period):
     meteo = _get_meteo_api()
     if meteo is not None:
-        meteo_ville = _get_pollution_ville(ville)
+        nh3_ville = _get_pollution_ville(ville)
+        nh3 = nh3_ville[period].air_quality_data['nh3']
+        return nh3
+    else:
+        print("Erreur : l'API météo n'est pas initialisée")
 
-        return meteo_ville.air_quality_data
-"""
+
+def get_pm10_j5(ville, period):
+    meteo = _get_meteo_api()
+    if meteo is not None:
+        pm10_ville = _get_pollution_ville(ville)
+        pm10 = pm10_ville[period].air_quality_data['pm10']
+        return pm10
+    else:
+        print("Erreur : l'API météo n'est pas initialisée")
 
 
 def get_temperature_actuelle(ville):
