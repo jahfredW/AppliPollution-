@@ -57,7 +57,7 @@ def _afficher_ligne_prevision(text, val_jour1, val_jour2, val_jour3, val_jour4, 
     print(description + jour1 + jour2 + jour3 + jour4 + jour5 + jour6 + jour7)
 
 
-def afficher_en_tete(ville, nh3):
+def afficher_en_tete(ville, date, aqi, nh3, co, pm10, pm25):
     """
     Formatage de l'en tête contenant les informations de météo actuelle pour une ville donnée
     :param ville: la ville sur laquelle porte la recherche
@@ -65,11 +65,16 @@ def afficher_en_tete(ville, nh3):
     :param condition_meteo: une description courte de la condition météo actuelle
     """
     message1 = "Ville: " + ville
-    message4 = "nh3: " + str(nh3)
-    message_ligne = _fermer_ligne("| " + message1 + ">" + message4)
-    print("|" + ("-" * (ECRAN_NOMBRE_COLONNES - 7)) + "|")
+    message2 = "Air Quality: " + str(aqi)
+    message3 = "Co: " + str(co)
+    message4 = "Pm10: " + str(pm10)
+    message5 = "Pm2_5: " + str(pm25)
+    message6 = "nh3: " + str(nh3)
+    message_ligne = _fermer_ligne("| " + message1 + " - " + message2 + " - " + message3 + " - " + message4
+                                  + " - " + message5 + " - " + message6)
+    print("*" + ("*" * (ECRAN_NOMBRE_COLONNES - 7)) + "*")
     print(message_ligne)
-    print("|" + ("-" * (ECRAN_NOMBRE_COLONNES - 7)) + "|")
+    print("*" + ("*" * (ECRAN_NOMBRE_COLONNES - 7)) + "*")
 
 
 def afficher_previsions(previsions):
@@ -87,7 +92,7 @@ def afficher_previsions(previsions):
     j_7 = get_jour(PREVISION_J_PLUS_7)
 
     _afficher_ligne_prevision("", j_1, j_2, j_3, j_4, j_5, j_6, j_7)
-    print("|" + ("-" * (ECRAN_NOMBRE_COLONNES - 7)) + "|")
+    print("*" + ("-" * (ECRAN_NOMBRE_COLONNES - 7)) + "*")
 
     for prevision in previsions:
         _afficher_ligne_prevision(prevision['description'], prevision['j1'], prevision['j2'], prevision['j3'],
@@ -150,11 +155,13 @@ def afficher_image_meteo(statut_image_meteo):
     Affiche à l'écran le contenu du fichier texte correspondant au statut passé en paramètre
     :param statut_image_meteo: statut météo qui permet de choisir l'image appropriée, c'est à dire le bon fichier à ouvrir
     """
-    chemin_reprtoire = os.path.dirname(__file__) + "/ressources/textes/"
+    chemin_repertoire = os.path.dirname(__file__) + "/ressources/textes/"
     nom_image = ""
 
-    if statut_image_meteo == STATUT_IMAGE_METEO_NEIGE:
-        nom_image = "neige.txt"
+    if statut_image_meteo == STATUT_IMAGE_INDICE_1:
+        nom_image = "indice1.txt"
+    # if statut_image_meteo == STATUT_IMAGE_METEO_NEIGE:
+    #     nom_image = "neige.txt"
     elif statut_image_meteo == STATUT_IMAGE_METEO_ORAGE:
         nom_image = "orage.txt"
     elif statut_image_meteo == STATUT_IMAGE_METEO_PLUIE:
@@ -168,7 +175,7 @@ def afficher_image_meteo(statut_image_meteo):
     else:
         print("le statut pour l'image météo n'est pas reconnu, merci de vérivier votre code")
 
-    chemin_image = chemin_reprtoire + nom_image
+    chemin_image = chemin_repertoire + nom_image
     fichier = open(chemin_image, 'r')
     contenu_fichier = fichier.read()
     print(contenu_fichier)
@@ -179,8 +186,8 @@ def afficher_ecran_accueil():
     """
     Affiche le premier écran qui permet à l'utilisateur de faire son choix entre recherche de ville et consultation directe
     """
-    print("|" + ("-" * (ECRAN_NOMBRE_COLONNES - 3 )) + "|")
-    print("|" + (" " * (ECRAN_NOMBRE_COLONNES - 3 )) + "|")
+    print("|" + ("-" * (ECRAN_NOMBRE_COLONNES - 3)) + "|")
+    print("|" + (" " * (ECRAN_NOMBRE_COLONNES - 3)) + "|")
     print("|" + (" Bienvenue dans ce programme météo, que souhaitez-vous faire ?"))
     print("|" + (" " * (ECRAN_NOMBRE_COLONNES - 3)) + "|")
     print(_fermer_ligne("|    1) Chercher une ville (tapez 1 et appuyez sur la touche entée)"))
@@ -189,6 +196,7 @@ def afficher_ecran_accueil():
     print("|" + (" " * (ECRAN_NOMBRE_COLONNES - 3)) + "|")
     print("|" + ("-" * (ECRAN_NOMBRE_COLONNES - 3)) + "|")
     print()
+
 
 def afficher_liste_ville(choix_ville_recherche):
     """

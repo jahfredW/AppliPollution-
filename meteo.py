@@ -212,6 +212,37 @@ def get_pm10_j5(ville, period):
         print("Erreur : l'API météo n'est pas initialisée")
 
 
+def get_co(ville, period):
+    meteo = _get_meteo_api()
+    if meteo is not None:
+        co_ville = _get_pollution_ville(ville)
+        co = co_ville[period].air_quality_data['co']
+        return co
+    else:
+        print("Erreur : l'API météo n'est pas initialisée")
+
+
+
+def get_pm25_j5(ville, period):
+    meteo = _get_meteo_api()
+    if meteo is not None:
+        pm25_ville = _get_pollution_ville(ville)
+        pm25 = pm25_ville[period].air_quality_data['pm2_5']
+        return pm25
+    else:
+        print("Erreur : l'API météo n'est pas initialisée")
+
+
+def get_aqi(ville, period):
+    meteo = _get_meteo_api()
+    if meteo is not None:
+        aqi_ville = _get_pollution_ville(ville)
+        aqi = aqi_ville[period].air_quality_data['aqi']
+        return aqi
+    else:
+        print("Erreur : l'API météo n'est pas initialisée")
+
+
 def get_temperature_actuelle(ville):
     """
     Obtient la températue actuelle d'une ville en degrés celsius

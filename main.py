@@ -51,7 +51,9 @@ if __name__ == '__main__':
 
                 # on affiche maintenant les résultats, c'est à dire les infromations météos relatives à la ville choisie par l'utilisateur.
                 # pour cela on utilise une fonction d'affichage en premier pour l'entête, qui permet d'obtenir les valeurs nécéssaires en fonction de la ville choisie
-                affichage_meteo.afficher_en_tete(ville_en_cours, meteo.get_nh3(ville_en_cours, period))
+                affichage_meteo.afficher_en_tete(ville_en_cours, meteo.get_date(ville_en_cours, period=0), meteo.get_aqi(ville_en_cours,period=0),
+                meteo.get_nh3(ville_en_cours, period=0), meteo.get_co(ville_en_cours,period=0), meteo.get_pm10_j5(ville_en_cours,period=0),
+                meteo.get_pm25_j5(ville_en_cours,period))
 
 
                 # l'entête est maintenant affichée pour l'utilisateur, avec les informations météos actuelles sur la ville, mais on souhaite également afficher
@@ -71,8 +73,11 @@ if __name__ == '__main__':
                 # liste_previsions.append(construire_affichage_prevision_vent_vitesse(ville_en_cours))
                 # liste_previsions.append(construire_affichage_prevision_vent_orientation(ville_en_cours))
                 #liste_previsions.append(construire_affichage_prevision_avis_meteo_detaille(ville_en_cours))
-                liste_pollution.append(construire_affichage_pm10(ville_en_cours))
+                liste_pollution.append(construire_affichage_aqi(ville_en_cours))
                 liste_pollution.append(construire_affichage_nh3(ville_en_cours))
+                liste_pollution.append(construire_affichage_co(ville_en_cours))
+                liste_pollution.append(construire_affichage_pm10(ville_en_cours))
+                liste_pollution.append(construire_affichage_pm25(ville_en_cours))
 
                 # une fois qu'on a les informations en mémoire (dans la liste) pour les prévisions météo sur les 7 prochains jours,
                 # on peut les afficher à l'écran avec un formatage sur les 7 prochains jours
@@ -81,20 +86,23 @@ if __name__ == '__main__':
                 # On récupère à présent l'avis météo, c'est une chaîne de caractère.
                 # En fonction de sa valeur, on va afficher une image différentes à l'utilisateur
                 # image = représentation sous forme de caractères présent dans une fichier
-                avis_meteo_actuel = meteo.get_avis_meteo_detaille(ville_en_cours)
+                # avis_meteo_actuel = meteo.get_avis_meteo_detaille(ville_en_cours)
+                indice_en_cours = meteo.get_aqi(ville_en_cours, 0)
 
-                if avis_meteo_actuel == STATUT_API_NUAGEUX:
-                    affichage_meteo.afficher_image_meteo(STATUT_IMAGE_METEO_NUAGEUX)
-                elif avis_meteo_actuel == STATUT_API_PEU_NUAGEUX:
-                    affichage_meteo.afficher_image_meteo(STATUT_IMAGE_METEO_ECLAIRCIES)
-                elif avis_meteo_actuel == STATUT_API_PARTIELLEMENT_NUAGEUX:
-                    affichage_meteo.afficher_image_meteo(STATUT_IMAGE_METEO_ECLAIRCIES)
-                elif avis_meteo_actuel == STATUT_API_CIEL_DEGAGE:
-                    affichage_meteo.afficher_image_meteo(STATUT_IMAGE_METEO_SOLEIL)
-                elif avis_meteo_actuel == STATUT_API_LEGERE_PLUIE:
-                    affichage_meteo.afficher_image_meteo(STATUT_IMAGE_METEO_PLUIE)
-                elif avis_meteo_actuel == STATUT_API_LEGERE_COUVERT:
-                    affichage_meteo.afficher_image_meteo(STATUT_IMAGE_METEO_NUAGEUX)
+                if indice_en_cours == 1:
+                    affichage_meteo.afficher_image_meteo(6)
+                # if avis_meteo_actuel == STATUT_API_NUAGEUX:
+                #     affichage_meteo.afficher_image_meteo(STATUT_IMAGE_METEO_NUAGEUX)
+                # elif avis_meteo_actuel == STATUT_API_PEU_NUAGEUX:
+                #     affichage_meteo.afficher_image_meteo(STATUT_IMAGE_METEO_ECLAIRCIES)
+                # elif avis_meteo_actuel == STATUT_API_PARTIELLEMENT_NUAGEUX:
+                #     affichage_meteo.afficher_image_meteo(STATUT_IMAGE_METEO_ECLAIRCIES)
+                # elif avis_meteo_actuel == STATUT_API_CIEL_DEGAGE:
+                #     affichage_meteo.afficher_image_meteo(STATUT_IMAGE_METEO_SOLEIL)
+                # elif avis_meteo_actuel == STATUT_API_LEGERE_PLUIE:
+                #     affichage_meteo.afficher_image_meteo(STATUT_IMAGE_METEO_PLUIE)
+                # elif avis_meteo_actuel == STATUT_API_LEGERE_COUVERT:
+                #     affichage_meteo.afficher_image_meteo(STATUT_IMAGE_METEO_NUAGEUX)
                 else:
                     print("l'image pour la prévision actuelle n'est pas configurée, pensez à mettre à jour le code")
 
