@@ -9,7 +9,7 @@ JOUR_NOMBRE_COLONNES = 25
 
 
 def _fermer_ligne(message):
-    """
+    """ 
     permet de clôturer une ligne de texte avec le caractère "|" en le positionnant à une position qui respecte la taille
     du tableau graphique souhaité (afin d'obtenir un effet visuel de cadre pour le tableau souhaité)
     :param message: le texte à affiché sur la ligne
