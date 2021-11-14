@@ -6,8 +6,8 @@ import requests
 
 if __name__ == '__main__':
 
-    meteo._get_location('paris','FR')
-    print(meteo._get_pollution_ville('paris'))
+    ville = meteo._get_pollution_ville('paris')
+    meteo.get_date(ville)
 
 
     """

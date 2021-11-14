@@ -160,22 +160,60 @@ def _get_pollution_ville(ville):
 
         # print(datetime.utcfromtimestamp(meteo_ville[0].ref_time).strftime('%Y-%m-%d %H:%M:%S'))
 
+        return meteo_ville
+
+    else:
+        print("Erreur : l'API météo n'est pas initialisée")
+
+
+        date = []
+        indice = []
         # for forecast in meteo_ville:
-        #     print(datetime.utcfromtimestamp(forecast.ref_time).strftime('%Y-%m-%d %H:%M:%S'))
+        #     date.append((datetime.utcfromtimestamp(forecast.ref_time).strftime('%Y-%m-%d %H:%M:%S')))
 
-        for forecast in meteo_ville:
-            print(forecast.reference_time(timeformat='date'))
-
-
-
-
-            # print(str(forecast.air_quality_data['co']))
+        # print(meteo_ville[0].air_quality_data['co'])
+        # print(emplacement.lat)
+        # date = []
+        # for forecast in meteo_ville:
+        #    print(forecast.reference_time(timeformat='date'))
 
 
+def get_date(ville):
+    date = []
+    tranche_24h = 0
+    for jours in range(0, 5):
+        # --- On ajoute à la liste date les previsions à n +
+        date.append(ville[tranche_24h].reference_time(timeformat='iso'))
+        # On incrémente la tranche de 24h
+        tranche_24h = tranche_24h + 24
+    print(date)
+    # On retourne une liste contenant les dates + 24
 
-        # return meteo_ville
-    # else:
-    #     print("Erreur : l'API météo n'est pas initialisée")
+    # return date
+
+    """
+
+
+                return meteo_ville
+            # else:
+            #     print("Erreur : l'API météo n'est pas initialisée")
+
+
+        """
+
+
+def get_nh3():
+    nh3 = []
+    tranche_24h = 0
+
+    for jours in range(0, 5):
+        # --- On ajoute à la liste date les previsions à n +
+        nh3.append(response['list'][tranche_24h]['components']['nh3'])
+        # On incrémente la tranche de 24h
+        tranche_24h = tranche_24h + 24
+    print(nh3)
+    # On retourne une liste contenant les dates + 24
+    return nh3
 
 
 """
@@ -283,9 +321,9 @@ def get_avis_meteo_detaille_prevision(ville, period):
     return meteo_ville.forecast_daily[period].detailed_status
 
 
-def get_prevision_pollution(ville):
-    meteo_ville = get_pol(ville)
-    return meteo_ville
+# def get_prevision_pollution(ville):
+#     meteo_ville = get_pol(ville)
+#     return meteo_ville
 
 
 def get_humidite_prevision(ville, period):
