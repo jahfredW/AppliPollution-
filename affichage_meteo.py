@@ -9,7 +9,7 @@ JOUR_NOMBRE_COLONNES = 25
 
 
 def _fermer_ligne(message):
-    """ 
+    """
     permet de clôturer une ligne de texte avec le caractère "|" en le positionnant à une position qui respecte la taille
     du tableau graphique souhaité (afin d'obtenir un effet visuel de cadre pour le tableau souhaité)
     :param message: le texte à affiché sur la ligne
@@ -57,7 +57,7 @@ def _afficher_ligne_prevision(text, val_jour1, val_jour2, val_jour3, val_jour4, 
     print(description + jour1 + jour2 + jour3 + jour4 + jour5 + jour6 + jour7)
 
 
-def afficher_en_tetePol(ville, date, aqi, nh3, co, pm10, pm25):
+def afficher_en_tetePol(ville, date, aqi, nh3, co, pm10, pm25, so2):
     """
     Formatage de l'en tête contenant les informations de météo actuelle pour une ville donnée
     :param ville: la ville sur laquelle porte la recherche
@@ -70,8 +70,9 @@ def afficher_en_tetePol(ville, date, aqi, nh3, co, pm10, pm25):
     message4 = "Pm10: " + str(pm10)
     message5 = "Pm2_5: " + str(pm25)
     message6 = "nh3: " + str(nh3)
+    message7 = " Soufre: " + str(so2)
     message_ligne = _fermer_ligne("| " + message1 + " - " + message2 + " - " + message3 + " - " + message4
-                                  + " - " + message5 + " - " + message6)
+                                  + " - " + message5 + " - " + message6 + " - " + message7)
     print("*" + ("*" * (ECRAN_NOMBRE_COLONNES - 7)) + "*")
     print(message_ligne)
     print("*" + ("*" * (ECRAN_NOMBRE_COLONNES - 7)) + "*")
@@ -90,16 +91,12 @@ def afficher_en_tete(ville, period, temp, pression, humi, windV, windD):
     message4 = "pression: " + str(pression) + "hpa"
     message5 = "humidité: " + str(humi)
     message6 = "Vent: " + str(windV) + "km/h" + " - " + "Direction: " + str(windD) + "°"
+
     message_ligne = _fermer_ligne("| " + message1 + " - " + message2 + " - " + message3 + " - " + message4
                                   + " - " + message5 + " - " + message6)
     print("*" + ("*" * (ECRAN_NOMBRE_COLONNES - 7)) + "*")
     print(message_ligne)
     print("*" + ("*" * (ECRAN_NOMBRE_COLONNES - 7)) + "*")
-
-
-
-
-
 
 
 

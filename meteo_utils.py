@@ -125,6 +125,20 @@ def construire_affichage_aqi(ville):
     return previsions
 
 
+def construire_affichage_so2(ville):
+
+    previsions = {}
+
+    previsions['description'] = "so2"
+    previsions['j1'] = str(pollution.get_so2(ville, POLLUTION_J_PLUS_1))
+    previsions['j2'] = str(pollution.get_so2(ville, POLLUTION_J_PLUS_2))
+    previsions['j3'] = str(pollution.get_so2(ville, POLLUTION_J_PLUS_3))
+    previsions['j4'] = str(pollution.get_so2(ville, POLLUTION_J_PLUS_4))
+    previsions['j5'] = str(pollution.get_so2(ville, POLLUTION_J_PLUS_5))
+    previsions['j6'] = "None"
+    previsions['j7'] = "None"
+
+    return previsions
 
 
 

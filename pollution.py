@@ -43,9 +43,6 @@ def _get_meteo_api():
     return _meteo_api
 
 
-
-
-
 def _get_pollution_ville(ville):
     '''
     Obtient les informations météo courantes d'une ville
@@ -148,5 +145,14 @@ def get_aqi(ville, period):
         aqi_ville = _get_pollution_ville(ville)
         aqi = aqi_ville[period].air_quality_data['aqi']
         return aqi
+    else:
+        print("Erreur : l'API météo n'est pas initialisée")
+
+def get_so2(ville, period):
+    meteo = _get_meteo_api()
+    if meteo is not None:
+        so2_ville = _get_pollution_ville(ville)
+        so2 = so2_ville[period].air_quality_data['so2']
+        return so2
     else:
         print("Erreur : l'API météo n'est pas initialisée")
