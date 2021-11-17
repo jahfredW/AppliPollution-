@@ -67,10 +67,10 @@ def afficher_en_tetePol(ville, date, aqi, nh3, co, pm10, pm25, so2):
     message1 = "Ville: " + ville
     message2 = "Air Quality: " + str(aqi)
     message3 = "Co: " + str(co)
-    message4 = "Pm10: " + str(pm10)
+    message4 = "Pm10: " + str(pm10) + ""
     message5 = "Pm2_5: " + str(pm25)
     message6 = "nh3: " + str(nh3)
-    message7 = " Soufre: " + str(so2)
+    message7 = " Soufre: " + str(so2) + "µg/m3"
     message_ligne = _fermer_ligne("| " + message1 + " - " + message2 + " - " + message3 + " - " + message4
                                   + " - " + message5 + " - " + message6 + " - " + message7)
     print("*" + ("*" * (ECRAN_NOMBRE_COLONNES - 7)) + "*")

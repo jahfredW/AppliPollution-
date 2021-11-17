@@ -1,3 +1,36 @@
+import matplotlib.pyplot as plt
+import numpy as np
+
+
+
+
+plt.xlim(0, 4)
+plt.ylim(0,20)
+x = [1, 2, 3, 4, 5]
+x = plt.xticks([1, 2, 3, 4, 5], [r'$lundi$', r'$mardi$', r'$mercredi$', r'$jeudi$', r'vendredi'])
+y = [ 5, 7, 8, 9, 10]
+plt.xlabel("Jours")
+plt.ylabel("Concentrations")
+plt.grid()
+plt.title("Previsions Pm10")
+plt.bar(x,y)
+plt.show()
+
+
+
+
+
+
+
+
+
+
+
+
+"""
+
+
+
 import requests
 
 url = 'http://api.openweathermap.org/data/2.5/air_pollution/forecast?lat={lat}&lon={lon}&appid={API key}'
@@ -85,7 +118,7 @@ get_nh3()
 
 
 
-"""
+
 city_name = "Dunkerque,FR"
 api_key = "de344c900509e22467e79e19be02d6bb"
 lat = 50.8333
@@ -118,14 +151,13 @@ def get_pollution(api_key, lat, lon):
 
     return pollution
 
-
 pollution = get_pollution(api_key, lat, lon)
 
 print(pollution)
-"""
 
 
-"""
+
+
 {'coord': {'lon': 2.3667, 'lat': 51.05},
  'list': [{'main': {'aqi': 2}, 'components': {'co': 230.31, 'no': 0, 'no2': 3.47, 'o3': 92.98, 'so2': 2.06, 'pm2_5': 5.03, 'pm10': 10.58, 'nh3': 0}, 'dt': 1636743600},
         {'main': {'aqi': 2}, 'components': {'co': 236.99, 'no': 0, 'no2': 2.91, 'o3': 92.98, 'so2': 1.82, 'pm2_5': 5.01, 'pm10': 12.36, 'nh3': 0.01}, 'dt': 1636747200},

@@ -1,10 +1,12 @@
 import meteo
 import pollution
+import datetime
 import affichage_meteo
 from meteo_common import *
 from meteo_utils import *
 import requests
 from tkinter import *
+import graphique
 
 if __name__ == '__main__':
 
@@ -49,26 +51,37 @@ if __name__ == '__main__':
                 # en fonction du choix de l'utilisateur, on récupère la ville choisie.
                 # ici, petite astuce : comme on utilise un dictionnaire avec le nom de de la ville et un index, le choix de l'utilisateur est en fait
                 # l'index du dictionnaire, ce qui permet de récupérer directement le nom de la ville grâce à l'index...
-                ville_en_cours = choix_ville_recherche[int(input("Pour consulter la météo d'une ville, tapez son numéro dans la liste> "))]
+                ville_en_cours = choix_ville_recherche[
+                    int(input("Pour consulter la météo d'une ville, tapez son numéro dans la liste> "))]
 
                 # on affiche maintenant les résultats, c'est à dire les infromations météos relatives à la ville choisie par l'utilisateur.
                 # pour cela on utilise une fonction d'affichage en premier pour l'entête, qui permet d'obtenir les valeurs nécéssaires en fonction de la ville choisie
-                affichage_meteo.afficher_en_tete(ville_en_cours, meteo.get_avis_meteo_detaille_prevision(ville_en_cours,period), meteo.get_temperature_actuelle(ville_en_cours)
-                                                 , meteo.get_pression_athmospherique_prevision(ville_en_cours,period=0), meteo.get_humidite_prevision(ville_en_cours,period=0)
-                                                 , meteo.get_vent_vitesse_prevision(ville_en_cours,period=0), meteo.get_vent_orientation_prevision(ville_en_cours,period=0))
+                affichage_meteo.afficher_en_tete(ville_en_cours,
+                                                 meteo.get_avis_meteo_detaille_prevision(ville_en_cours, period),
+                                                 meteo.get_temperature_actuelle(ville_en_cours)
+                                                 ,
+                                                 meteo.get_pression_athmospherique_prevision(ville_en_cours, period=0),
+                                                 meteo.get_humidite_prevision(ville_en_cours, period=0)
+                                                 , meteo.get_vent_vitesse_prevision(ville_en_cours, period=0),
+                                                 meteo.get_vent_orientation_prevision(ville_en_cours, period=0))
 
                 # l'entête est maintenant affichée pour l'utilisateur, avec les informations météos actuelles sur la ville, mais on souhaite également afficher
                 # les prévisions à 7 jours.
                 # pour cela on construit une liste qui va stockée les valeurs de prévisions pour les 7 prochains jours
                 liste_previsions = []
 
-
-                liste_previsions.append(construire_affichage_prevision_temperature(ville_en_cours, "T° jour", PREVISION_TEMPERATURE_JOUR))
-                liste_previsions.append(construire_affichage_prevision_temperature(ville_en_cours, "T° min", PREVISION_TEMPERATURE_MINI))
-                liste_previsions.append(construire_affichage_prevision_temperature(ville_en_cours, "T° max", PREVISION_TEMPERATURE_MAXI))
-                liste_previsions.append(construire_affichage_prevision_temperature(ville_en_cours, "T° mat", PREVISION_TEMPERATURE_MATIN))
-                liste_previsions.append(construire_affichage_prevision_temperature(ville_en_cours, "T° midi", PREVISION_TEMPERATURE_APRES_MIDI))
-                liste_previsions.append(construire_affichage_prevision_temperature(ville_en_cours, "T° nuit", PREVISION_TEMPERATURE_NUIT))
+                liste_previsions.append(
+                    construire_affichage_prevision_temperature(ville_en_cours, "T° jour", PREVISION_TEMPERATURE_JOUR))
+                liste_previsions.append(
+                    construire_affichage_prevision_temperature(ville_en_cours, "T° min", PREVISION_TEMPERATURE_MINI))
+                liste_previsions.append(
+                    construire_affichage_prevision_temperature(ville_en_cours, "T° max", PREVISION_TEMPERATURE_MAXI))
+                liste_previsions.append(
+                    construire_affichage_prevision_temperature(ville_en_cours, "T° mat", PREVISION_TEMPERATURE_MATIN))
+                liste_previsions.append(construire_affichage_prevision_temperature(ville_en_cours, "T° midi",
+                                                                                   PREVISION_TEMPERATURE_APRES_MIDI))
+                liste_previsions.append(
+                    construire_affichage_prevision_temperature(ville_en_cours, "T° nuit", PREVISION_TEMPERATURE_NUIT))
                 liste_previsions.append(construire_affichage_prevision_pression_athmospherique(ville_en_cours))
                 liste_previsions.append(construire_affichage_prevision_humidite(ville_en_cours))
                 liste_previsions.append(construire_affichage_prevision_vent_vitesse(ville_en_cours))
@@ -82,8 +95,6 @@ if __name__ == '__main__':
                 # En fonction de sa valeur, on va afficher une image différentes à l'utilisateur
                 # image = représentation sous forme de caractères présent dans une fichier
                 avis_meteo_actuel = meteo.get_avis_meteo_detaille(ville_en_cours)
-
-
 
                 if avis_meteo_actuel == STATUT_API_NUAGEUX:
                     affichage_meteo.afficher_image_meteo(STATUT_IMAGE_METEO_NUAGEUX)
@@ -157,14 +168,14 @@ if __name__ == '__main__':
                 # pour cela on utilise une fonction d'affichage en premier pour l'entête, qui permet d'obtenir les valeurs nécéssaires en fonction de la ville choisie
 
                 affichage_meteo.afficher_en_tetePol(ville_en_cours, pollution.get_date(ville_en_cours, period=0),
-                                                 pollution.get_aqi(ville_en_cours, period=0),
+                                                    pollution.get_aqi(ville_en_cours, period=0),
 
-                                                 pollution.get_nh3(ville_en_cours, period=0),
-                                                 pollution.get_co(ville_en_cours, period=0),
-                                                 pollution.get_pm10_j5(ville_en_cours, period=0),
+                                                    pollution.get_nh3(ville_en_cours, period=0),
+                                                    pollution.get_co(ville_en_cours, period=0),
+                                                    pollution.get_pm10_j5(ville_en_cours, period=0),
 
-                                                 pollution.get_pm25_j5(ville_en_cours, period=0),
-                                                pollution.get_so2(ville_en_cours,period=0))
+                                                    pollution.get_pm25_j5(ville_en_cours, period=0),
+                                                    pollution.get_so2(ville_en_cours, period=0))
 
                 # l'entête est maintenant affichée pour l'utilisateur, avec les informations météos actuelles sur la ville, mais on souhaite également afficher
 
@@ -180,7 +191,6 @@ if __name__ == '__main__':
                 liste_pollution.append(construire_affichage_pm25(ville_en_cours))
                 liste_pollution.append(construire_affichage_nh3(ville_en_cours))
                 liste_pollution.append(construire_affichage_so2(ville_en_cours))
-
 
                 # une fois qu'on a les informations en mémoire (dans la liste) pour les prévisions météo sur les 7 prochains jours,
 
@@ -232,45 +242,47 @@ if __name__ == '__main__':
 
                     print("l'image pour la prévision actuelle n'est pas configurée, pensez à mettre à jour le code")
 
+            graphique.graph_pm10(ville_en_cours)
 
-                root = Tk()
-                root.geometry("300x300")
-                root.title(f"{ville_en_cours}")
-
-
-                def display_city_name(ville):
-                    ville_label = Label(root, text=f"{ville_en_cours}")
-                    vide = Label(root, text=" ")
-                    ville_label.config(font=("Consolas", 35))
-                    ville_label.pack(side='top')
-                    vide.config(font=("Consolas",35))
+            root = Tk()
+            root.geometry("300x300")
+            root.title(f"{ville_en_cours}")
 
 
-                def display_stats(pollution):
-                    aqi = Label(root, text=f"Indice: {pollution.get_aqi(ville_en_cours, 0)} ")
-                    pm10 = Label(root, text=f"Pm10: {pollution.get_pm10_j5(ville_en_cours, 0)} µm")
-                    pm25 = Label(root, text=f"Pm2_5: {pollution.get_pm25_j5(ville_en_cours, 0)} µm")
+            def display_city_name(ville_en_cours):
+                ville_label = Label(root, text=f"{ville_en_cours}")
+                vide = Label(root, text=" ")
+                ville_label.config(font=("Consolas", 35))
+                ville_label.pack(side='top')
+                vide.config(font=("Consolas", 35))
 
-                    aqi.config(font=("Consolas", 28))
-                    pm10.config(font=("Consolas", 22))
-                    pm25.config(font=("Consolas", 22))
 
-                    aqi.pack(side='top')
-                    pm10.pack(side='top')
-                    pm25.pack(side='top')
+            def display_stats(pollution):
+                aqi = Label(root, text=f"Indice: {pollution.get_aqi(ville_en_cours, 0)} ")
+                pm10 = Label(root, text=f"Pm10: {pollution.get_pm10_j5(ville_en_cours, 0)} µm/m3")
+                pm25 = Label(root, text=f"Pm2_5: {pollution.get_pm25_j5(ville_en_cours, 0)} µm/m3")
 
-                display_city_name(ville_en_cours)
-                display_stats(pollution)
+                aqi.config(font=("Consolas", 28))
+                pm10.config(font=("Consolas", 22))
+                pm25.config(font=("Consolas", 22))
 
-                if pollution.get_aqi(ville_en_cours, 0) == 1:
-                    com = Label(root,text=" Vas courir ! ")
-                    com.config(font=("Arial", 30))
-                    com.pack(side='bottom')
+                aqi.pack(side='top')
+                pm10.pack(side='top')
+                pm25.pack(side='top')
 
-                mainloop()
 
+            def display_commentaire():
+                com = Label(root, text=" Vas courir ! ")
+                com.config(font=("Arial", 30))
+                com.pack(side='bottom')
+
+
+            display_city_name(ville_en_cours)
+            display_stats(pollution)
+            display_commentaire()
+
+            mainloop()
 
 
     else:
         print("Désolé votre choix n'est pas un 1 ou 2, que souhaitez-vous faire ?")
-        

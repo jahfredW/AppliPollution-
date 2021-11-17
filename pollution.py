@@ -5,6 +5,8 @@ from pyowm.utils.config import get_default_config
 from pyowm.utils import measurables
 from pyowm.utils import timestamps, formatting
 import requests
+import matplotlib.pyplot as plt
+import numpy as np
 
 # initialisation des variables du module (le "_" devant le nom des variables est une convention
 # pour indiquer qu'elle doivent être utilisées à titre privé dans le module
@@ -110,10 +112,12 @@ def get_nh3(ville, period):
 
 
 def get_pm10_j5(ville, period):
+
     meteo = _get_meteo_api()
     if meteo is not None:
         pm10_ville = _get_pollution_ville(ville)
         pm10 = pm10_ville[period].air_quality_data['pm10']
+
         return pm10
     else:
         print("Erreur : l'API météo n'est pas initialisée")
@@ -152,7 +156,7 @@ def get_so2(ville, period):
     meteo = _get_meteo_api()
     if meteo is not None:
         so2_ville = _get_pollution_ville(ville)
-        so2 = so2_ville[period].air_quality_data['so2']
+        so2 = (so2_ville[period].air_quality_data['so2'])
         return so2
     else:
         print("Erreur : l'API météo n'est pas initialisée")
