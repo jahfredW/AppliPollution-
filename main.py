@@ -112,6 +112,8 @@ if __name__ == '__main__':
                     print("l'image pour la prévision actuelle n'est pas configurée, pensez à mettre à jour le code")
 
     elif choix_utilisateur == 2:
+        # implémentation du choix graphique ou bilan
+        a = affichage_meteo.afficher_ecran_pollution()
 
         # on récupère le texte de l'utilisateur saisie à l'écran et on le stock dans la variable choix_ville
 
@@ -242,7 +244,8 @@ if __name__ == '__main__':
 
                     print("l'image pour la prévision actuelle n'est pas configurée, pensez à mettre à jour le code")
 
-            graphique.graph_pm10(ville_en_cours)
+
+            graphique.draw_graph(ville_en_cours,1)
 
             root = Tk()
             root.geometry("300x300")

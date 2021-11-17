@@ -219,6 +219,13 @@ def afficher_ecran_accueil():
     print("|" + ("-" * (ECRAN_NOMBRE_COLONNES - 3)) + "|")
     print()
 
+def afficher_ecran_pollution():
+
+    print(_fermer_ligne("| 1) Consulter le point prévionnel (tapez 1 et appuyez sur la touche entree"))
+    print(_fermer_ligne("| 2) Consulter les graphiques prévisionnels ( tapez 2)"))
+    a = int(input())
+    return a
+
 
 def afficher_liste_ville(choix_ville_recherche):
     """
