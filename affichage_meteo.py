@@ -8,6 +8,21 @@ DESCRIPTION_NOMBRE_COLONNES = 20
 JOUR_NOMBRE_COLONNES = 25
 
 
+def continuer():
+
+    meteoloop = True
+    menu = int(input("Menu principal : tapez 1" + '\n' + " Quitter : tapez 2" + '\n'))
+
+    if menu == 2:
+        meteoloop = False
+        print("Merci d'avoir utilisé l'application ")
+
+    elif menu == 1:
+        meteoloop = True
+
+    return meteoloop
+
+
 def _fermer_ligne(message):
     """
     permet de clôturer une ligne de texte avec le caractère "|" en le positionnant à une position qui respecte la taille
@@ -64,7 +79,7 @@ def afficher_en_tetePol(ville, date, aqi, nh3, co, pm10, pm25, so2):
     :param temperature: la température actuelle
     :param condition_meteo: une description courte de la condition météo actuelle
     """
-    message1 = "Ville: " + ville
+    message1 = " Ce jour : " + ville
     message2 = "Air Quality: " + str(aqi)
     message3 = "Co: " + str(co)
     message4 = "Pm10: " + str(pm10) + ""
@@ -215,6 +230,7 @@ def afficher_ecran_accueil():
     print("|" + (" " * (ECRAN_NOMBRE_COLONNES - 3)) + "|")
     print(_fermer_ligne("|    1) Consulter les prévisions météo pour votre ville (tapez 1 et appuyez sur la touche entée)"))
     print(_fermer_ligne("|    2) Consulter les prévisions pollution pour  votre ville (tapez 2 et appuyez sur entree) "))
+    print(_fermer_ligne("|    3) Consulter le Smart Sport Point ( tapez 3 et appuyez sur entree"))
     print("|" + (" " * (ECRAN_NOMBRE_COLONNES - 3)) + "|")
     print("|" + ("-" * (ECRAN_NOMBRE_COLONNES - 3)) + "|")
     print()
@@ -225,6 +241,70 @@ def afficher_ecran_pollution():
     print(_fermer_ligne("| 2) Consulter les graphiques prévisionnels ( tapez 2)"))
     a = int(input())
     return a
+
+
+def afficher_liste_polluants():
+    print(_fermer_ligne("| Quels polluants ? "))
+    print(_fermer_ligne("| 1 - PM10"))
+    print(_fermer_ligne("| 2 - PM2_5"))
+    b = int(input())
+    return b
+
+
+"""
+def afficher_choix_ville():
+
+    choix_ville = input("Quelle ville recherchez-vous ?> ")
+
+    # on récupère le résultat de la recherche des villes et on le stock dans la variable liste_ville
+
+    liste_villes = meteo.recherche_ville(choix_ville)
+
+    # on vérifie si la recherche à bien renvoyé un résultat (pour ne pas travailler sur des données inexistantes et générer une erreur technique)
+
+    if liste_villes == None:
+
+        print("Désolé, aucune ville corespondante n'a été trouvée.")
+
+    else:
+
+        # si la variable existe mais que le nombre de ville est égale à zéro, on prévient l'utilisateur
+
+        if len(liste_villes) == 0:
+
+            print("Désolé, aucune ville corespondante n'a été trouvée.")
+
+        else:
+
+            # construction d'un dictionnaire pour classer les villes et permettre à l'utilisateur
+
+            # de les sélectionner par un numéro
+
+            choix_ville_recherche = {}
+
+            numero_choix = 1
+
+            for ville in liste_villes:
+                choix_ville_recherche[numero_choix] = ville
+
+                numero_choix += 1
+
+            # on affiche maintenant le résultat de la recherche à l'utilisateur pour qu'il puisse choisir une ville à consulter
+
+            afficher_liste_ville(choix_ville_recherche)
+
+            # en fonction du choix de l'utilisateur, on récupère la ville choisie.
+
+            # ici, petite astuce : comme on utilise un dictionnaire avec le nom de de la ville et un index, le choix de l'utilisateur est en fait
+
+            # l'index du dictionnaire, ce qui permet de récupérer directement le nom de la ville grâce à l'index...
+
+            ville_en_cours = choix_ville_recherche[
+                int(input("Pour consulter les infos de la ville, tapez son numéro dans la liste> "))]
+"""
+
+
+
 
 
 def afficher_liste_ville(choix_ville_recherche):
